@@ -13,7 +13,7 @@ const TodoList = (props) => {
   return (
     <div className="todo-list">
       <div className="todo-header">
-        <p>Here is your TODO list:</p>
+        <div>Total number of tasks: {todos.length}</div>
         <button className="button" onClick={() => props.onRemoveAll()}>Remove all</button>
       </div>
       {todos.map((todo) => {
