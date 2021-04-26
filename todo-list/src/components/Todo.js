@@ -6,6 +6,7 @@ const Todo = (props) => {
     <div className="todo">
       <h5 className="todo-name">{props.todo.name}</h5>
       <p className="todo-description">{props.todo.description}</p>
+      <p>{props.todo.dueDate}</p>
       {props.todo.completed && <p className="todo-done">DONE</p>}
     </div>);
 }

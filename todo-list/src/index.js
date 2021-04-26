@@ -24,6 +24,7 @@ const App = () => {
     const newTodo = {
       name: todo.name,
       description: todo.description,
+      dueDate: todo.dueDate,
       completed: false
     };
     await axios.post('http://localhost:3001/todos/', newTodo).then(loadTodos)
@@ -37,7 +38,7 @@ const App = () => {
 
   const completeTodo = async (id) => {
     console.log('completeTodo called with id ' + id);
-    await axios.put(`http://localhost:3001/todos/${id}`, {completed: true});
+    await axios.put(`http://localhost:3001/todos/${id}`, {completed: false});
     loadTodos();
   }
 
