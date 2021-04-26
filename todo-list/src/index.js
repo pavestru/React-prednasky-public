@@ -38,6 +38,12 @@ const App = () => {
 
   const completeTodo = async (id) => {
     console.log('completeTodo called with id ' + id);
+    await axios.put(`http://localhost:3001/todos/${id}`, {completed: true});
+    loadTodos();
+  }
+
+  const undoTodo = async (id) => {
+    console.log('undoTodo called with id ' + id);
     await axios.put(`http://localhost:3001/todos/${id}`, {completed: false});
     loadTodos();
   }
@@ -55,7 +61,7 @@ const App = () => {
         <Header appName="UROB ZMENU 2021" title="TODO list" subtitle="Co mozes urobit zajtra, nerob dnes!" isVisible={true} />
         <div className="content">
           <TodoForm onAdd={addTodo} />
-          <TodoList todos={todos} onRemove={removeTodo} onComplete={completeTodo} onRemoveAll={removeAll}/>    
+          <TodoList todos={todos} onRemove={removeTodo} onComplete={completeTodo} onUndo={undoTodo} onRemoveAll={removeAll}/>    
         </div>
       </div>
     </div>
