@@ -11,6 +11,7 @@ import './styles.css'
 // root component
 const App = () => {
   const [todos, setTodos] = useState([])
+  const [showNew, setShowNew] = useState(false)
 
   const loadTodos = useCallback(async () => {
     await axios.get('http://localhost:3001/todos/').then(response => setTodos(response.data))
@@ -28,6 +29,10 @@ const App = () => {
       completed: false
     };
     await axios.post('http://localhost:3001/todos/', newTodo).then(loadTodos)
+  }
+
+  const editTodo = async (todo) => {
+    await axios.put('http://localhost:3001/todos/', todo).then(loadTodos)
   }
 
   const removeTodo = async (id) => {
@@ -60,8 +65,9 @@ const App = () => {
       <div className="container">
         <Header appName="UROB ZMENU 2021" title="TODO list" subtitle="Co mozes urobit zajtra, nerob dnes!" isVisible={true} />
         <div className="content">
-          <TodoForm onAdd={addTodo} />
-          <TodoList todos={todos} onRemove={removeTodo} onComplete={completeTodo} onUndo={undoTodo} onRemoveAll={removeAll}/>    
+          <button className="button" onClick={() => setShowNew(true)}>New</button>
+          {showNew && <TodoForm onAdd={addTodo} onCancel={() => setShowNew(false)} />}
+          <TodoList todos={todos} onRemove={removeTodo} onComplete={completeTodo} onUndo={undoTodo} onRemoveAll={removeAll} onEdit={editTodo}/>    
         </div>
       </div>
     </div>
