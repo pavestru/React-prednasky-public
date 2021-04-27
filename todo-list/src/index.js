@@ -11,6 +11,7 @@ import './styles.css'
 // root component
 const App = () => {
   const [todos, setTodos] = useState([])
+  const [editingId, setEditingId] = useState('');
 
   const loadTodos = useCallback(async () => {
     await axios.get('http://localhost:3001/todos/').then(response => setTodos(response.data))
@@ -42,6 +43,13 @@ const App = () => {
     loadTodos();
   }
 
+  const updateTodo = async (todo) => {
+    console.log('updateTodo called with id ' + todo.id);
+    await axios.put(`http://localhost:3001/todos/${todo.id}`, todo);
+    setEditingId('');
+    loadTodos();
+  }
+
   const undoTodo = async (id) => {
     console.log('undoTodo called with id ' + id);
     await axios.put(`http://localhost:3001/todos/${id}`, {completed: false});
@@ -54,14 +62,29 @@ const App = () => {
     loadTodos();
   }
 
+  const startEditing = (id) => {
+    setEditingId(id);
+  }
+
+  const getMeTodoThatIEdit = () => {
+    const todo = todos.find((todo) => todo.id === editingId);
+    return todo;
+  }
 
   return (
     <div className="app">
       <div className="container">
         <Header appName="UROB ZMENU 2021" title="TODO list" subtitle="Co mozes urobit zajtra, nerob dnes!" isVisible={true} />
         <div className="content">
-          <TodoForm onAdd={addTodo} />
-          <TodoList todos={todos} onRemove={removeTodo} onComplete={completeTodo} onUndo={undoTodo} onRemoveAll={removeAll}/>    
+          <TodoForm todo={getMeTodoThatIEdit()} onAdd={addTodo} onUpdate={updateTodo}/>
+          <TodoList
+            todos={todos}
+            onRemove={removeTodo}
+            onComplete={completeTodo}
+            onUndo={undoTodo}
+            onRemoveAll={removeAll}
+            onEdit={startEditing}
+          />    
         </div>
       </div>
     </div>
