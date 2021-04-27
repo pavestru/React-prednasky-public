@@ -11,7 +11,7 @@ const TodoForm = (props) => {
   const onFormSubmit = (e) => {
     e.preventDefault(); // prevent full page refresh
     if (props.editing) {
-      props.onEdit({name, description, dueDate});
+      props.onEdit({id: props.todo.id, name, description, dueDate});
     } else {
       props.onAdd({name, description, dueDate});
     }
