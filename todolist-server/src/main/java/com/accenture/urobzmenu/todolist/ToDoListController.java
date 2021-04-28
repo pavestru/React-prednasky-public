@@ -71,6 +71,15 @@ public class ToDoListController {
 			DbToDoItem dbToDoItem = optionalDbToDoItem.get();
 
 			dbToDoItem.setCompleted(request.isCompleted());
+			if (request.getName() != null) {
+				dbToDoItem.setName(request.getName());
+			}
+			if (request.getDescription() != null) {
+				dbToDoItem.setDescription(request.getDescription());
+			}
+			if (request.getDueDate() != null) {
+				dbToDoItem.setDueDate(request.getDueDate());
+			}
 
 			repository.save(dbToDoItem); // update
 		}
