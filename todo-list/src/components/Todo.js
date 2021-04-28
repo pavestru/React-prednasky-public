@@ -1,4 +1,5 @@
 import React from 'react'
+import dayjs from 'dayjs';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -40,7 +41,7 @@ const Todo = (props) => {
           </IconButton>
         }
         title={props.todo.name}
-        subheader={`Due on ${props.todo.dueDate}`}
+        subheader={`Due on ${dayjs(props.todo.dueDate).format('D.M.YYYY')}`}
       />
       <Menu
         id="simple-menu"
