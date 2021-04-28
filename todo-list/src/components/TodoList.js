@@ -19,16 +19,15 @@ const TodoList = (props) => {
       {todos.map((todo) => {
         return (
           <div className="todo-row" key={getId()}>
-            <Todo todo={todo} ></Todo>
-            <div>
-              {todo.completed
-                ? <button className="button button-done" onClick={() => props.onUndo(todo.id)}>UNDO</button>
-                : <button className="button button-done" onClick={() => props.onComplete(todo.id)}>DONE</button> }
-              <button className="button" onClick={() => props.onEdit(todo.id)}>Edit</button>  
-              <button className="button button-del" onClick={() => props.onRemove(todo.id)}>x</button>
-            </div>              
+            <Todo
+              todo={todo}
+              onUndo={props.onUndo}
+              onComplete={props.onComplete}
+              onEdit={props.onEdit}
+              onRemove={props.onRemove}
+            />
           </div>
-        )
+        );
       })}
     </div>
   )

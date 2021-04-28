@@ -10,12 +10,8 @@
 }
 
 .todo-list .todo-row {
-    display: flex;
-    position: relative;
     width: 100%;
-    border-top: 1px solid #457B9D;
-    padding: 16px 0;
-    justify-content: space-between;
+    padding: 10px 0;
 }
 
 .todo-list .button-done {
