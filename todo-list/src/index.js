@@ -74,7 +74,7 @@ const App = () => {
   return (
     <div className="app">
       <div className="container">
-        <Header appName="UROB ZMENU 2021" title="TODO list" subtitle="Co mozes urobit zajtra, nerob dnes!" isVisible={true} />
+        <Header appName="UROB ZMENU 2021" title="TODO list" subtitle="Co mozes urobit dnes, neodkladaj na zajtra!" isVisible={true} />
         <div className="content">
           <TodoForm todo={getMeTodoThatIEdit()} onAdd={addTodo} onUpdate={updateTodo}/>
           <TodoList
