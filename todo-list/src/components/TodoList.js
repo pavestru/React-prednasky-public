@@ -7,6 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import { Flipper, Flipped } from 'react-flip-toolkit'
+
 import { Todo }  from './Todo'
 import './TodoList.css';
 
@@ -39,19 +41,23 @@ const TodoList = (props) => {
         <div>Total number of tasks: {todos.length}</div>
         <button className="button" onClick={handleClickOpenDialog}>Remove all</button>
       </div>
-      {todos.map((todo) => {
-        return (
-          <div className="todo-row" key={getId()}>
-            <Todo
-              todo={todo}
-              onUndo={props.onUndo}
-              onComplete={props.onComplete}
-              onEdit={props.onEdit}
-              onRemove={props.onRemove}
-            />
-          </div>
-        );
-      })}
+      <Flipper flipKey={todos}>
+        {todos.map((todo) => {
+          return (
+            <Flipped key={todo.id} flipId={todo.id}>
+              <div className="todo-row">
+                <Todo
+                  todo={todo}
+                  onUndo={props.onUndo}
+                  onComplete={props.onComplete}
+                  onEdit={props.onEdit}
+                  onRemove={props.onRemove}
+                />
+              </div>
+            </Flipped>
+          );
+        })}
+      </Flipper>
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
